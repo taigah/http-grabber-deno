@@ -34,17 +34,42 @@ const parserRes = parser.parse(Deno.args)
 
 if (parserRes.tag !== MAIN_COMMAND) {
   console.error(parserRes.error.toString())
-  throw Deno.exit(1)
+  Deno.exit(1)
 }
 if (parserRes.remaining().rawFlags().length) {
   console.error('Unknown flags:', ...parserRes.remaining().rawFlags())
-  throw Deno.exit(1)
+  Deno.exit(1)
 }
 
 const port = parserRes.value.port
 const hostname = parserRes.value.host
 const withHeaders = parserRes.value['with-headers'] ?? false
 const withBody = parserRes.value['with-body'] ?? false
+
+// check net permission
+{
+  class PermissionDenied extends Error {}
+
+  try {
+    const perm = { name: 'net' } as const
+    const { state } = await Deno.permissions.query(perm)
+    if (state === 'denied') {
+      throw new PermissionDenied()
+    } else if (state === 'prompt') {
+      const { state } = await Deno.permissions.request(perm)
+      if (state === 'denied') {
+        throw new PermissionDenied()
+      }
+    }
+  } catch (err) {
+    if (err instanceof PermissionDenied) {
+      console.error(`Permission denied to access ${hostname}:${port}, try to run with --allow-net`)
+    } else {
+      console.error(err)
+    }
+    Deno.exit(1)
+  }
+}
 
 const server = serve({ port, hostname })
 

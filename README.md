@@ -3,15 +3,17 @@
 ## Install (optional)
 
 ```sh
-deno install --allow-net 'https://raw.githubusercontent.com/taigah/http-grabber-deno/master/http-grabber.ts'
+deno install 'https://raw.githubusercontent.com/taigah/http-grabber-deno/master/http-grabber.ts'
 ```
+
+Note: you can add the `--allow-net` flag if you do not want to be prompted a network access request each time you run the program.
 
 ## Usage
 
 If not installed
 
 ```sh
-deno run --allow-net 'https://raw.githubusercontent.com/taigah/http-grabber-deno/master/http-grabber.ts' [options]
+deno run --unstable 'https://raw.githubusercontent.com/taigah/http-grabber-deno/master/http-grabber.ts'
 ```
 
 If installed

@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-deno run --allow-net http-grabber.ts $@
+deno run --unstable http-grabber.ts $@
