@@ -3,7 +3,7 @@
 ## Install (optional)
 
 ```sh
-deno install --allow-net 'https://raw.githubusercontent.com/taigah/http-grabber-deno/master/http-grabber.ts'
+deno install --allow-net 'https://raw.githubusercontent.com/taigah/http-grabber-deno/v1.0.0/http-grabber.ts'
 ```
 
 ## Usage
@@ -11,13 +11,13 @@ deno install --allow-net 'https://raw.githubusercontent.com/taigah/http-grabber-
 If not installed
 
 ```sh
-deno run --allow-net 'https://raw.githubusercontent.com/taigah/http-grabber-deno/master/http-grabber.ts' [options]
+deno run --allow-net 'https://raw.githubusercontent.com/taigah/http-grabber-deno/v1.0.0/http-grabber.ts'
 ```
 
 If installed
 
 ```sh
-http-grabber [options]
+http-grabber
 ```
 
 ## Options
